@@ -24,6 +24,6 @@ public class UsuarioController {
 
     @PatchMapping("/{id}")
     public Usuario atualizar (@RequestBody Usuario usuario, @PathVariable Long id){
-        return usuarioService.update(id,usuario);
+        return usuarioService.update(id, usuario);
     }
 }
