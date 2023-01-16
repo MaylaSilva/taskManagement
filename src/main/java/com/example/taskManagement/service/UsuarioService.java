@@ -4,6 +4,9 @@ import com.example.taskManagement.model.Usuario;
 import com.example.taskManagement.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
@@ -21,18 +24,25 @@ public class UsuarioService {
         return usuario;
     }
     public Usuario update (Long usuarioId, Usuario usuario){
-//        Usuario usuario1 = usuarioRepository.findById(usuarioId).orElseThrow(IllegalArgumentException::new);
-//        .map(atualizar ->{
-//            atualizar.setNomeUsuario(atualizar.getNomeUsuario());
-//            atualizar.setNomeCompleto(atualizar.getNomeCompleto());
-//            atualizar.setSenha(atualizar.getSenha());
-//            atualizar.setEmail(atualizar.getEmail());
-//            atualizar.setGenero(atualizar.getGenero());
-//            atualizar.setNascimento(atualizar.getNascimento());
-//            atualizar.setTelefone(atualizar.getTelefone());
-//            atualizar.setEndereco(atualizar.getEndereco());
-//        }
-//        );
-        return usuarioRepository.save(usuario);
+        Usuario usuario1 = usuarioRepository.findById(usuarioId).orElseThrow(IllegalArgumentException::new);
+
+        usuario1.setNomeUsuario(usuario.getNomeUsuario());
+        usuario1.setNomeCompleto(usuario.getNomeCompleto());
+        usuario1.setSenha(usuario.getSenha());
+        usuario1.setEmail(usuario.getEmail());
+        usuario1.setGenero(usuario.getGenero());
+        usuario1.setNascimento(usuario.getNascimento());
+        usuario1.setTelefone(usuario.getTelefone());
+        usuario1.setEndereco(usuario.getEndereco());
+
+        usuarioRepository.save(usuario1);
+
+        return usuario1;
+    }
+    public Usuario localizarId (Long id){
+        return usuarioRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+    public List<Usuario> listarTodos(){
+        return (List<Usuario>) usuarioRepository.findAll();
     }
 }
